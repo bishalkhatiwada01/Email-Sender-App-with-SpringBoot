@@ -5,12 +5,14 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.nio.file.FileSystems;
 
 @Service
 public class EmailServiceImpl implements EmailService {
@@ -66,6 +68,24 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendEmailWithFile(String to, String subject, String message, File file) {
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+
+        try {
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+            helper.setTo(to);
+            helper.setSubject(subject);
+            helper.setText(message);
+            helper.setFrom(myEmail);
+            FileSystemResource fileSystemResource = new FileSystemResource(file);
+            helper.addAttachment(fileSystemResource.getFilename(), file);
+            mailSender.send(mimeMessage);
+            logger.info("-----------Sent mail successfully------------");
+
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+
+        }
 
 
     }
