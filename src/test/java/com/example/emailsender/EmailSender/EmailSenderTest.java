@@ -17,4 +17,10 @@ public class EmailSenderTest {
         System.out.println("Sending Email...........");
         emailService.sendEmail("bishalkhatiwada13@gmail.com", "Email from spring boot", "This email is sent test wether the email is sent or not");
     }
+
+    @Test
+    void sendHtmlInEmail() {
+        String html = "" + "<h1 style=\"color: #333; font-size: 24px; margin-bottom: 10px;\">Welcome to My Sample Page</h1>\n" + "<p style=\"color: #666; line-height: 1.6; margin-bottom: 20px;\">This is a small sample of HTML code.</p>\n" + "<h2 style=\"color: #333; font-size: 20px; margin-bottom: 10px;\">Additional Heading</h2>\n" + "<p style=\"color: #666; line-height: 1.6;\">This is an additional paragraph added to the sample page.</p>\n";
+        emailService.sendEmailWithHtml("bishalkhatiwada13@gmail.com", "sending email with html", html);
+    }
 }
