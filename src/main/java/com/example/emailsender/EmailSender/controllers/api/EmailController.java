@@ -30,7 +30,7 @@ public class EmailController {
     }
 
     @PostMapping("/send-with-file")
-    public ResponseEntity<CustomResponse> sendWithFile(@RequestBody EmailRequest request, @RequestParam MultipartFile file) throws IOException {
+    public ResponseEntity<CustomResponse> sendWithFile(@RequestPart EmailRequest request, @RequestPart MultipartFile file) throws IOException {
         emailService.sendEmailWithFile(request.getTo(), request.getSubject(), request.getMessage(), file.getInputStream());
         return ResponseEntity.ok(CustomResponse.builder().message("Email sent successfully").httpStatus(HttpStatus.OK).success(true).build());
 

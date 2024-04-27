@@ -78,7 +78,7 @@ public class EmailServiceImpl implements EmailService {
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
             helper.setTo(to);
             helper.setSubject(subject);
-            helper.setText(message);
+            helper.setText(message, true);
             helper.setFrom(myEmail);
             FileSystemResource fileSystemResource = new FileSystemResource(file);
             helper.addAttachment(fileSystemResource.getFilename(), file);
@@ -101,7 +101,7 @@ public class EmailServiceImpl implements EmailService {
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
             helper.setTo(to);
             helper.setSubject(subject);
-            helper.setText(message);
+            helper.setText(message, true);
             helper.setFrom(myEmail);
             File file = new File("test.png");
             Files.copy(is, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
