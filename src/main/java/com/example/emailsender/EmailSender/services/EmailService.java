@@ -1,6 +1,7 @@
 package com.example.emailsender.EmailSender.services;
 
 import java.io.File;
+import java.io.InputStream;
 
 public interface EmailService {
 
@@ -15,5 +16,7 @@ public interface EmailService {
 
     // send email with file
     void sendEmailWithFile(String to, String subject, String message, File file);
+
+    void sendEmailWithFile(String to, String subject, String message, InputStream is);
 
 }

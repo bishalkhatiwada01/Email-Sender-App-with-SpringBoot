@@ -6,6 +6,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.example.emailsender.EmailSender.services.EmailService;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 
 @SpringBootTest
@@ -29,5 +32,17 @@ public class EmailSenderTest {
     @Test
     void sentFileInEmail() {
         emailService.sendEmailWithFile("bishalkhatiwada13@gmail.com", "sending email with FILE", "This email contains file", new File("/Users/bishalkhatiwada/Downloads/WhatsApp Image 2023-12-19 at 2.15.18 PM.jpeg"));
+    }
+
+    @Test
+    void sentFileInEmaiWithStream() {
+        File file = new File("/Users/bishalkhatiwada/Downloads/WhatsApp Image 2023-12-19 at 2.15.18 PM.jpeg");
+        try {
+            InputStream is = new FileInputStream(file);
+            emailService.sendEmailWithFile("bishalkhatiwada13@gmail.com", "sending email with FILE", "This email contains file", is);
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
