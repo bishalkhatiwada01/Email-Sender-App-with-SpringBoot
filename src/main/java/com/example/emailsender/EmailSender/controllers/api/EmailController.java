@@ -12,6 +12,8 @@ import java.io.IOException;
 
 
 @RestController
+@CrossOrigin("*")
+
 @RequestMapping("/api/v1/email")
 public class EmailController {
 
@@ -23,6 +25,7 @@ public class EmailController {
 
 
     // send email
+
     @PostMapping("/send")
     public ResponseEntity<?> sendEmail(@RequestBody EmailRequest request) {
         emailService.sendEmailWithHtml(request.getTo(), request.getSubject(), request.getMessage());
